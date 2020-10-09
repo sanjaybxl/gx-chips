@@ -1,5 +1,5 @@
 {
-  "name": "ng2-carouselamos",
+  "name": "gx-chips",
   "version": "4.1.0",
   "description": "This is a simple slider/carousel for angular 2+",
   "license": "MIT",
@@ -26,12 +26,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/joselcvarela/ng2-carouselamos.git"
+    "url": "git+ssh://git@github.com/joselcvarela/gx-chips.git"
   },
   "bugs": {
-    "url": "https://github.com/joselcvarela/ng2-carouselamos/issues"
+    "url": "https://github.com/joselcvarela/gx-chips/issues"
   },
-  "homepage": "https://github.com/joselcvarela/ng2-carouselamos#readme",
+  "homepage": "https://github.com/joselcvarela/gx-chips#readme",
   "dependencies": {
     "tslib": "^2.0.0"
   },

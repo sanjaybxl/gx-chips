@@ -1,14 +1,19 @@
-.ng2-carouselamos-container {
+.gx-chips-container {
   position: relative;
   display: flex;
   justify-content: center;
 }
 
-.ng2-carouselamos-wrapper {
+.chips-count {
+  width: 80px; 
+  margin: 10px;
+}
+
+.gx-chips-wrapper {
   overflow: hidden;
 }
 
-.ng2-carouselamos {
+.gx-chips {
   display: flex;
   transition: transform 1s;
 }
@@ -17,11 +22,6 @@
   pointer-events: none;
   position: absolute;
   display: flex;
-  width: 100%;
-  justify-content: space-between;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
 }
 
 .controls button {

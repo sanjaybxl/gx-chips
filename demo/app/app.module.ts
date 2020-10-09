@@ -2,11 +2,12 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
 import { AppComponent } from "./app.component";
-import { Ng2CarouselamosModule } from "ng2-carouselamos";
+import { DemoMaterialModule } from './material-module';
+import { GxChipsModule } from 'projects/gx-chips/src/public-api';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, Ng2CarouselamosModule],
+  imports: [BrowserModule, GxChipsModule, DemoMaterialModule],
   providers: [],
   bootstrap: [AppComponent]
 })

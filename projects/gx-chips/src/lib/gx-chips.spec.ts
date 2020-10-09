@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { Ng2CarouselamosComponent } from "./ng2-carouselamos.component";
+import { GxChipsComponent } from "./gx-chips.component";
 
-describe("Ng2CarouselamosComponent", () => {
-  let component: Ng2CarouselamosComponent;
-  let fixture: ComponentFixture<Ng2CarouselamosComponent>;
+describe("GxChipsComponent", () => {
+  let component: GxChipsComponent;
+  let fixture: ComponentFixture<GxChipsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [Ng2CarouselamosComponent]
+      declarations: [GxChipsComponent]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Ng2CarouselamosComponent);
+    fixture = TestBed.createComponent(GxChipsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,34 +1,23 @@
-<div class="container">
-  <h1>ng2-carouselamos</h1>
-
-  <div
-    ng2-carouselamos
-    [startAt]="2"
-    [width]="500"
-    [items]="listOfItems"
-    [$item]="itemTemplate"
-    [$prev]="prevTemplate"
-    [$next]="nextTemplate"
-    (onSelectedItem)="selectedItem = $event.item; selectedIndex = $event.index"
-  ></div>
-
-  <div>
-    Current item selected
-    {{ selectedIndex }}
+<div id="container">
+  <div gx-chips class="slides-wrapper" [items]="availableColors" [width]="400" [$prev]="prev" [$next]="next"
+    [$item]="item">
   </div>
 
-  <ng-template #prevTemplate>
-    <button class="controls">Previous</button>
+  <ng-template #prev>
+      <mat-icon>chevron_left</mat-icon>
   </ng-template>
-
-  <ng-template #nextTemplate>
-    <button class="controls">Next</button>
+  <ng-template #next>
+      <mat-icon>chevron_right</mat-icon>
   </ng-template>
+  <ng-template #item let-item let-i="index">
 
-  <ng-template let-item let-i="index" #itemTemplate>
-    <div class="item">
-      <img [src]="item" alt="" />
-      <span class="description">Simple image</span>
+    <div class="slide-items">
+      <mat-chip-list>
+        <mat-chip [removable]="removable" (removed)="remove(item)">{{ item.name }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
     </div>
+
   </ng-template>
 </div>

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng2-carouselamos-demo": {
+    "gx-chips-demo": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,14 +13,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ng2-carouselamos-demo",
+            "outputPath": "dist/gx-chips-demo",
             "index": "demo/index.html",
             "main": "demo/main.ts",
             "polyfills": "demo/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["demo/favicon.ico", "demo/assets"],
-            "styles": ["demo/styles.css"],
+            "styles": ["demo/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -57,48 +57,48 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng2-carouselamos-demo:build"
+            "browserTarget": "gx-chips-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng2-carouselamos-demo:build:production"
+              "browserTarget": "gx-chips-demo:build:production"
             }
           }
         }
       }
     },
-    "ng2-carouselamos": {
+    "gx-chips": {
       "projectType": "library",
-      "root": "projects/ng2-carouselamos",
-      "sourceRoot": "projects/ng2-carouselamos/src",
+      "root": "projects/gx-chips",
+      "sourceRoot": "projects/gx-chips/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/ng2-carouselamos/tsconfig.lib.json",
-            "project": "projects/ng2-carouselamos/ng-package.json"
+            "tsConfig": "projects/gx-chips/tsconfig.lib.json",
+            "project": "projects/gx-chips/ng-package.json"
           }
         ,          "configurations": {
             "production": {
-              "tsConfig": "projects/ng2-carouselamos/tsconfig.lib.prod.json"
+              "tsConfig": "projects/gx-chips/tsconfig.lib.prod.json"
             }
           }
 },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ng2-carouselamos/src/test.ts",
-            "tsConfig": "projects/ng2-carouselamos/tsconfig.spec.json",
-            "karmaConfig": "projects/ng2-carouselamos/karma.conf.js"
+            "main": "projects/gx-chips/src/test.ts",
+            "tsConfig": "projects/gx-chips/tsconfig.spec.json",
+            "karmaConfig": "projects/gx-chips/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ng2-carouselamos/tsconfig.lib.json",
-              "projects/ng2-carouselamos/tsconfig.spec.json"
+              "projects/gx-chips/tsconfig.lib.json",
+              "projects/gx-chips/tsconfig.spec.json"
             ],
             "exclude": ["**/node_modules/**"]
           }
@@ -106,5 +106,5 @@
       }
     }
   },
-  "defaultProject": "ng2-carouselamos-demo"
+  "defaultProject": "gx-chips-demo"
 }

@@ -19,11 +19,11 @@
       "dom"
     ],
     "paths": {
-      "ng2-carouselamos": [
-        "dist/ng2-carouselamos"
+      "gx-chips": [
+        "dist/gx-chips"
       ],
-      "ng2-carouselamos/*": [
-        "dist/ng2-carouselamos/*"
+      "gx-chips/*": [
+        "dist/gx-chips/*"
       ]
     }
   },

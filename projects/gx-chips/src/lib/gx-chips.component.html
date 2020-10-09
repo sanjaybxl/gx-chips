@@ -1,0 +1,41 @@
+<div class="gx-chips-container">
+  <div class="controls">
+      <mat-chip class="chips-count">{{items.length}}</mat-chip>
+    <button type="button" *ngIf="$prev && items?.length > 0" (click)="onLongPressing(false, list)" [disabled]="amount >= 0" longPress
+      (mouseLongPress)="onLongPressing(false, list)" (contextmenu)="onLeftContextMenu($event, false)">
+      <ng-template [ngTemplateOutlet]="$prev"></ng-template>
+    </button>
+    <div class="gx-chips-wrapper" [style.width]="width + 'px'" (mousedown)="onMousedown($event)"
+      (mousemove)="onMousemove($event, list.scrollWidth)" (mouseup)="onMouseup($event, list)"
+      (mouseleave)="onMouseup($event, list)">
+      <div class="gx-chips" [attr.startPress]="startPress"
+        [style.transition]="startPress > 0 ? 'none' : '-webkit-transform 1s'" [style.webkitTransition]="
+        startPress > 0 ? 'none' : '-webkit-transform 1s'
+      " [style.transform]="'translateX(' + amount + 'px)'" [style.webkitTransform]="'translateX(' + amount + 'px)'"
+        #list>
+        <ng-template *ngFor="let item of items; let i = index" [ngTemplateOutlet]="$item" [ngTemplateOutletContext]="{
+          $implicit: item,
+          index: i,
+          selectedIndex: childIndex
+        }"></ng-template>
+      </div>
+    </div>
+    <button type="button" *ngIf="$next && items?.length > 0" longPress (click)="onLongPressing(true, list)"
+      (mouseLongPress)="onLongPressing(true, list)" [disabled]="amount <= -(list.scrollWidth - width)"
+      (contextmenu)="onRightContextMenu($event, true)">
+      <ng-template [ngTemplateOutlet]="$next"></ng-template>
+    </button>
+    <button mat-button *ngIf="items?.length > 0" (click)="clear()">
+      Clear
+    </button>
+  </div>
+  <div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
+    [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
+  </div>
+  <mat-menu #contextMenu="matMenu">
+    <ng-template matMenuContent let-item="item">
+      <button mat-menu-item *ngIf="item.start" (click)="moveToBegin()">Jump to Start</button>
+      <button mat-menu-item *ngIf="!item.start" (click)="moveToEnd()">Jump to End</button>
+    </ng-template>
+  </mat-menu>
+</div>

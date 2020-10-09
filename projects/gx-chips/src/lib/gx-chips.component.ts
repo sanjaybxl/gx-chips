@@ -10,6 +10,7 @@ import {
   AfterViewInit
 } from "@angular/core";
 import isEqual from "lodash.isequal";
+import { MatMenuTrigger } from '@angular/material/menu';
 
 export interface SelectedItemInterface {
   item: any;
@@ -18,9 +19,9 @@ export interface SelectedItemInterface {
 }
 
 @Component({
-  selector: "[ng2-carouselamos]",
-  styleUrls: ["./ng2-carouselamos.component.scss"],
-  templateUrl: "./ng2-carouselamos.component.html"
+  selector: "[gx-chips]",
+  styleUrls: ["./gx-chips.component.scss"],
+  templateUrl: "./gx-chips.component.html"
 })
 /*
  *
@@ -31,7 +32,7 @@ export interface SelectedItemInterface {
  * @param() $next - Template for next button
  * @param() $item - Template for the item
  */
-export class Ng2CarouselamosComponent implements AfterViewInit {
+export class GxChipsComponent implements AfterViewInit {
   childIndex: number = 0;
   amount: number = 0;
   startPress: number = 0;
@@ -44,7 +45,7 @@ export class Ng2CarouselamosComponent implements AfterViewInit {
   items: Array<any> = [];
 
   @Input()
-  width: number = 500;
+  width: number = 200;
 
   @Input()
   $prev: TemplateRef<any>;
@@ -61,16 +62,16 @@ export class Ng2CarouselamosComponent implements AfterViewInit {
   @ViewChild("list", { static: true })
   list: ElementRef;
 
+  @ViewChild(MatMenuTrigger)
+  contextMenu: MatMenuTrigger;
+
+  contextMenuPosition = { x: '0px', y: '0px' };
+
   onMousedown(e: MouseEvent) {
     if (e.which === 1) {
       this.startPress = e.clientX;
       this.lastX = this.amount;
     }
-  }
-  onTouchdown(e: TouchEvent) {
-    if (navigator.userAgent.indexOf("Android") >= 0) e.preventDefault();
-    this.startPress = e.targetTouches[0].clientX;
-    this.lastX = this.amount;
   }
 
   onMousemove(e: MouseEvent, maxWidth: number) {
@@ -80,12 +81,6 @@ export class Ng2CarouselamosComponent implements AfterViewInit {
       this.amount = amount;
     }
   }
-  onTouchmove(e: TouchEvent, maxWidth: number) {
-    if (navigator.userAgent.indexOf("Android") >= 0) e.preventDefault();
-    const amount = this.lastX - (this.startPress - e.targetTouches[0].clientX);
-    if (amount > 0 || amount < -(maxWidth - this.width)) return;
-    this.amount = amount;
-  }
 
   onMouseup(e: MouseEvent, elem: any) {
     if (e.which === 1) {
@@ -94,10 +89,14 @@ export class Ng2CarouselamosComponent implements AfterViewInit {
     }
   }
 
-  onTouchup(e: TouchEvent, elem: any) {
-    if (navigator.userAgent.indexOf("Android") >= 0) e.preventDefault();
-    this.startPress = 0;
-    this.snap(elem);
+  onLongPressing(forward: boolean, elem: any) {
+    if (forward && this.amount <= -(this.list.nativeElement.scrollWidth - this.width))
+      return;
+    if (!forward && this.amount >= 0)
+      return;
+    console.log('scroll');
+
+    this.scroll(forward, elem)
   }
 
   snap(elem: any) {
@@ -124,7 +123,7 @@ export class Ng2CarouselamosComponent implements AfterViewInit {
     return counter;
   }
 
-  scroll(forward: boolean, elem: any, qty = 1) {
+  private scroll(forward: boolean, elem: any, qty = 1) {
     this.childIndex += forward ? qty : -qty;
     this.onSelectedItem.emit({
       item: this.items[this.childIndex],
@@ -134,14 +133,16 @@ export class Ng2CarouselamosComponent implements AfterViewInit {
     this.amount = -this.calcScroll(elem);
   }
 
-  calcScroll(elem: any) {
+  private calcScroll(elem: any) {
     let counter = 0;
     for (let i = this.childIndex - 1; i >= 0; i--) {
       const el = elem.children[i];
-      const style = el.currentStyle || window.getComputedStyle(el);
-      counter +=
-        el.offsetWidth +
-        (parseFloat(style.marginLeft) + parseFloat(style.marginRight));
+      if (el) {
+        const style = el.currentStyle || window.getComputedStyle(el);
+        counter +=
+          el.offsetWidth +
+          (parseFloat(style.marginLeft) + parseFloat(style.marginRight));
+      }
     }
     return counter;
   }
@@ -166,5 +167,35 @@ export class Ng2CarouselamosComponent implements AfterViewInit {
     this.startPress = 1;
     this.scroll(true, this.list.nativeElement, this.startAt);
     setTimeout(() => (this.startPress = 0));
+  }
+
+  onLeftContextMenu(event: MouseEvent, forward: any) {
+    event.preventDefault();
+    this.contextMenuPosition.x = event.clientX + 'px';
+    this.contextMenuPosition.y = event.clientY + 'px';
+    this.contextMenu.menuData = { 'item': { 'start': true } };
+    this.contextMenu.menu.focusFirstItem('mouse');
+    this.contextMenu.openMenu();
+  }
+
+  onRightContextMenu(event: MouseEvent, forward: any) {
+    event.preventDefault();
+    this.contextMenuPosition.x = event.clientX + 'px';
+    this.contextMenuPosition.y = event.clientY + 'px';
+    this.contextMenu.menuData = { 'item': { 'start': false } };
+    this.contextMenu.menu.focusFirstItem('mouse');
+    this.contextMenu.openMenu();
+  }
+
+  moveToBegin() {
+    this.amount = 0;
+  }
+
+  moveToEnd() {
+    this.amount = -(this.list.nativeElement.scrollWidth - this.width);
+  }
+
+  clear() {
+    this.items = [];
   }
 }
