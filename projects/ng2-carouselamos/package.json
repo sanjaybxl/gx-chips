@@ -32,6 +32,9 @@
     "url": "https://github.com/joselcvarela/ng2-carouselamos/issues"
   },
   "homepage": "https://github.com/joselcvarela/ng2-carouselamos#readme",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "peerDependencies": {
     "@angular/common": "^8.2.9",
     "@angular/core": "^8.2.9",

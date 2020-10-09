@@ -5,6 +5,6 @@
     "types": []
   },
   "files": ["demo/main.ts", "demo/polyfills.ts"],
-  "include": ["demo/**/*.ts"],
+  "include": ["demo/**/*.d.ts"],
   "exclude": ["demo/test.ts", "demo/**/*.spec.ts"]
 }

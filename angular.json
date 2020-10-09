@@ -18,7 +18,7 @@
             "main": "demo/main.ts",
             "polyfills": "demo/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": ["demo/favicon.ico", "demo/assets"],
             "styles": ["demo/styles.css"],
             "scripts": []
@@ -36,7 +36,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -80,7 +79,12 @@
             "tsConfig": "projects/ng2-carouselamos/tsconfig.lib.json",
             "project": "projects/ng2-carouselamos/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng2-carouselamos/tsconfig.lib.prod.json"
+            }
+          }
+},
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
