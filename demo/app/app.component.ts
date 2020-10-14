@@ -38,8 +38,9 @@ export class AppComponent {
   ];
 
   remove(item: any): void {
+    console.log('remove');
+    console.info(item);
     const index = this.availableColors.indexOf(item);
-
     if (index >= 0) {
       this.availableColors.splice(index, 1);
     }
