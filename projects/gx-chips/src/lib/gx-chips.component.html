@@ -1,7 +1,9 @@
 <div class="gx-chips-container">
   <div class="controls">
-      <mat-chip class="chips-count">{{items.length}}</mat-chip>
-    <button type="button" *ngIf="$prev && items?.length > 0" (click)="onLongPressing(false, list)" [disabled]="amount >= 0" longPress
+      <mat-chip class="chips-count" *ngIf="items?.length > 0">{{ items.length > 100 ? '99+' : items.length }}</mat-chip>
+    <button mat-icon-button *ngIf="$prev && items?.length > 0" (click)="onLongPressing(false, list)" 
+      [disabled]="amount >= 0" longPress
+      [style.display]="amount >= 0 && amount <= -(list.scrollWidth - width) ? 'none' : 'block'"
       (mouseLongPress)="onLongPressing(false, list)" (contextmenu)="onLeftContextMenu($event, false)">
       <ng-template [ngTemplateOutlet]="$prev"></ng-template>
     </button>
@@ -20,12 +22,14 @@
         }"></ng-template>
       </div>
     </div>
-    <button type="button" *ngIf="$next && items?.length > 0" longPress (click)="onLongPressing(true, list)"
+    <button mat-icon-button *ngIf="$next && items?.length > 0" longPress (click)="onLongPressing(true, list)"
       (mouseLongPress)="onLongPressing(true, list)" [disabled]="amount <= -(list.scrollWidth - width)"
-      (contextmenu)="onRightContextMenu($event, true)">
+      (contextmenu)="onRightContextMenu($event, true)"
+      [style.display]="amount >= 0 && amount <= -(list.scrollWidth - width) ? 'none' : 'block'"
+      >
       <ng-template [ngTemplateOutlet]="$next"></ng-template>
     </button>
-    <button mat-button *ngIf="items?.length > 0" (click)="clear()">
+    <button mat-button *ngIf="items?.length > 1" (click)="clear()">
       Clear
     </button>
   </div>

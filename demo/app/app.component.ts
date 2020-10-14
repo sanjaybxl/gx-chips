@@ -6,7 +6,9 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  removable = true
+  removable = true;
+  selectable = true;
+
   availableColors = [
     { name: 'none', color: '' },
     { name: 'Primary', color: 'primary' },
